@@ -1,0 +1,33 @@
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = Boot
+  FILE_GUID      = 2b2ebf29-16f3-4e9e-b13a-333333333333
+  MODULE_TYPE    = UEFI_APPLICATION
+  VERSION_STRING = 0.1
+  ENTRY_POINT    = UefiMain
+
+[BuildOptions]
+  MSFT:*_*_X64_CC_FLAGS = /Od /Oi- /RTC-  # strip RTC
+
+[Sources]
+  boot.c
+  cpu.c
+  seal.c
+  svm.c
+  windows_loader.c
+  guest_boot.nasm
+  guest_stub.nasm
+  host_stack.nasm
+  runtime_vm_loop.nasm
+  vmrun.nasm
+  asm_reads.nasm
+  hv_call.asm
+
+[Packages]
+  MdePkg/MdePkg.dec
+  BootLoaderPkg/BootLoaderPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  UefiBootServicesTableLib
